@@ -9,7 +9,8 @@ All Stock and Options data derived from [Tradier](https://www.tradier.com).
 # Strategy
 
 ![image info](./output.png)
-Market Data from 1/6/2024 at 1:14pm.
+
+Market Data from 1/6/2024 at around 1pm.
 
 Strikes were as follows:
 - Long Call ATM:  240.0
@@ -18,16 +19,22 @@ Strikes were as follows:
 
 Current price of TSLA - $237.49
 
+Where the green verticle line is the current price of TSLA, and the red verticle line is the break even price of TSLA.
+
 # Simulation
 
 ![image info](./simulation.png)
-Shows Monte Carlo Simulation of TSLA stock over time period while option contract is active. From 1/6/2024 to 4/19/2024, or a little more than 70 trading days.
+
+Shows what a Monte Carlo Simulation of TSLA stock over time period of option contract with 5 different simulations.
 
 # Results
-![image info](./allocations.png)
-This image shows the results of different allocations of a cash balance ($100,000) where the option allocation is between (0, 100)% and the rest is cash which returned an interest at the current rate ~5.25%.
 
-The strategy appears to have a weak positive relationship between option allocation and returns, even when accounting for the 5.25% interest paid on cash.
+I set up different allocations of a cash balance ($1,000,000) where the option allocation is between (0, 100)% and the rest of the balance is allocated towards short term treasuries, returning an interest at the current rate of ~5.25%.
+
+<!-- ![image info](./allocations.png)
+
+
+The strategy appears to have a weak positive relationship between option allocation and returns, showing that the strategy is outpreforming short-term treasury bills.
 
 Best Fit Line data:
 ```
@@ -40,8 +47,8 @@ Standard error: 0.06184419248624469
 
 ![image info](./results.png)
 
-Since the strategy is a synthetic covered call, and as showed before there is exposed downside risk, the larger the balance that is put into the strategy, the higher the liklihood of a catastrophic drawdown.
+Since the strategy is a synthetic covered call, there is exposed downside risk, the larger the balance that is put into the strategy, the higher the liklihood of a catastrophic drawdown.
 
 Though the strategy can work in the short term, due to the exposed downside risk, it is important to keep in mind the risk of losing a sizable portion of the portfolio.
 
-Therefore, similar to yieldmaxes trading strategy, it makes sense to only allocation a small portion of a trading balance to minimize the possibility liquidation.
+Therefore, similar to yieldmaxes trading strategy, it makes sense to only allocation a small portion of a trading balance to minimize the possibility liquidation. -->
