@@ -29,6 +29,57 @@ class MonteCarloSimulation:
         
         return max(-1, result)
 
+    def simulate(self, cash_allocation: float, option_allocation: float, daily_interest_rate = .000137):
+        results = []
+
+        for _ in range(self.trials):
+            if(cash_allocation + option_allocation != 1):
+                raise Exception("Cash and Option Allocation must be equal than 1")
+            
+            interest = (cash_allocation * self.funds) * self.steps * daily_interest_rate
+
+            for _ in range(self.steps):
+                # TODO: Replace with sampling
+                new_price = self.current_price + np.random.normal(0, self.volatility)
+                
+                self.current_price = new_price
+                self.price_history.append(new_price)
+            
+            allocation = option_allocation * self.funds
+            option_returns = self.portfolio.getReturn(self.current_price, allocation)
+
+            result = option_returns + interest
+
+            results.append(result)
+
+            # Reset variables
+            self.current_price = self.start_price
+            self.price_history = [self.current_price]
+        
+        return (np.mean(results), np.std(results))
+    
+    def simulateOnce(self, cash_allocation: float, option_allocation: float, daily_interest_rate = .000137):
+        results = []
+
+        if(cash_allocation + option_allocation != 1):
+            raise Exception("Cash and Option Allocation must be equal than 1")
+        
+        interest = (cash_allocation * self.funds) * self.steps * daily_interest_rate
+
+        for _ in range(self.steps):
+            new_price = self.current_price + np.random.normal(0, self.volatility)
+            self.current_price = new_price
+            self.price_history.append(new_price)
+        
+            allocation = option_allocation * self.funds
+            option_returns = self.portfolio.getReturn(self.current_price, allocation)
+
+            result = option_returns + interest
+
+            results.append(result)
+        
+        return (result, np.std(results))
+         
     def run(self, cash_allocation: float, option_allocation: float, daily_interest_rate = .000137, display: bool = False):
         if(cash_allocation + option_allocation != 1):
             raise Exception("Cash and Option Allocation must be equal than 1")

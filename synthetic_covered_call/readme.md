@@ -31,24 +31,3 @@ Shows what a Monte Carlo Simulation of TSLA stock over time period of option con
 
 I set up different allocations of a cash balance ($1,000,000) where the option allocation is between (0, 100)% and the rest of the balance is allocated towards short term treasuries, returning an interest at the current rate of ~5.25%.
 
-<!-- ![image info](./allocations.png)
-
-
-The strategy appears to have a weak positive relationship between option allocation and returns, showing that the strategy is outpreforming short-term treasury bills.
-
-Best Fit Line data:
-```
-Slope: 0.31616203507715607
-Intercept: -0.03168971855652475
-R-value: 0.458842637103749
-P-value: 1.5769465133709017e-06
-Standard error: 0.06184419248624469
-```
-
-![image info](./results.png)
-
-Since the strategy is a synthetic covered call, there is exposed downside risk, the larger the balance that is put into the strategy, the higher the liklihood of a catastrophic drawdown.
-
-Though the strategy can work in the short term, due to the exposed downside risk, it is important to keep in mind the risk of losing a sizable portion of the portfolio.
-
-Therefore, similar to yieldmaxes trading strategy, it makes sense to only allocation a small portion of a trading balance to minimize the possibility liquidation. -->
