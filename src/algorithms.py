@@ -17,6 +17,8 @@ def binarySearch(values:list, target:int):
         
         elif section[mid] < target:
             start += mid
+        else:
+            return start + mid
         
         if(len(section) <= 1):
             return start

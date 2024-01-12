@@ -7,6 +7,20 @@ class Tradier:
     def __init__(self, access_token):
         self.access_token = access_token
 
+    def getPriceChanges(self, symbol, start_date, end_date):
+        response = requests.get('https://api.tradier.com/v1/markets/history',
+                                params={'symbol': symbol, 'interval': 'daily',
+                                        'start': start_date, 'end': end_date, 'session_filter': 'all'},
+                                headers={'Authorization': 'Bearer ' +
+                                         self.access_token, 'Accept': 'application/json'}
+                                )
+
+        json_response = response.json()
+        data = pd.DataFrame(json_response['history']['day'])
+
+        data['change'] = data['open'].pct_change()
+        return data[['date', 'change']]
+
     def getVolatility(self, symbol, start_date, end_date):
         response = requests.get('https://api.tradier.com/v1/markets/history',
                                 params={'symbol': symbol, 'interval': 'daily',
@@ -22,17 +36,12 @@ class Tradier:
 
         count = data['open'].count()
 
-        mean = data['open'].sum() / count
-
-        # print("Mean:", mean)
+        mean = data['open'].mean()
 
         data['residual'] = data['open'] - mean
         data['rs'] = pow(data['residual'], 2)
 
-        variance = data['rs'].sum() / count
-
-        # print("Variance:", variance)
-        # print("Count:", data['rs'].count())
+        variance = data['rs'].mean()
 
         daily_std = np.sqrt(variance) / np.sqrt(count)
         # print("Daiy Standard Deviation:", daily_std)
