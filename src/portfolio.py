@@ -32,6 +32,7 @@ class Portfolio:
         cost_per_trade = np.sum([x.premium for x in self.options])
         
         self.cost = cost_per_trade
+        self.log()
 
     def log(self):
         print("Portfolio:")
